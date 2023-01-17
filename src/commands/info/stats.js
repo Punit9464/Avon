@@ -6,9 +6,6 @@ class stats extends AvonCommand{
     get name(){
         return 'stats'
     }
-    get aliases(){
-        return ['stats']
-    }
     async run(client,message,args,prefix){
         let uptime = moment(message.client.uptime).format(`D [Days], H [hrs], m [mins], s[secs]`);
         let embed = new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| ${client.user.username} Information` , iconURL : client.user.displayAvatarURL()}).setDescription(
