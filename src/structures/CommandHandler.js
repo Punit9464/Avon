@@ -52,13 +52,31 @@ class AvonCommands extends EventEmitter {
             return message.channel.send({embeds : [embed],components : [ro]}).catch((e) => { message.author.send({content : `Error while sending message there : ${e.message}`}).catch(() => {}) })
         }
         if(!message.content.startsWith(prefix)) return;
-        const args = message.content.slice(prefix.length).trim().split(/ =/);
+        try{
+        const args = message.content.slice(prefix.length).trim().split(/ +/);
         const commandName = args.shift().toLowerCase();
         const avonCommand = this.commands.get(commandName) || this.commands.find((c) => c.aliases && c.aliases.includes(commandName));
-        if(avonCommand === undefined) return message.reply({embeds : [new EmbedBuilder().setColor(this.client.config.color).setDescription(`${this.client.emoji.cross} Abhi nahi bana lovde command kyu try kr rha!`)]})
         if(!avonCommand) return;
         let client = this.client;
-        await avonCommand.run(client,message,args,prefix).catch(() => { });
+        if(avonCommand.inVoice){
+            if(message.guild.members.me.voice.channel && !message.member.voice.channel){
+                return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setDescription(`${client.emoji.cross} | You must be connected to a voice channel.`)]})
+            }
+        }
+        if(avonCommand.sameVoice){
+            if(message.guild.members.me.voice.channelId !== message.member.voice.channelId && message.guild.members.me.voice.channel){
+                return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setDescription(`${client.emoji.cross} | You must be connected to ${message.guild.members.me.voice.channel}`)]})
+            }
+        }
+        let player = client.poru.players.get(message.guild.id);
+        if(avonCommand.player){
+            if(!player || !player.currentTrack){
+                return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| I am not playing Anything` , iconURL : message.author.displayAvatarURL({dynamic : true})})]})
+            }
+        }
+        
+        avonCommand.run(client,message,args,prefix,player).catch(() => { });
+        } catch(e) { console.error(e) } 
     }
 }
 module.exports = AvonCommands;

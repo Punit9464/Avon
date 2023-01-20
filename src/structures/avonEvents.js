@@ -1,6 +1,7 @@
 const { readdirSync } = require("fs");
 const ascii = require(`ascii-table`);
 const table = new ascii().setHeading('Client Events','Status');
+const table2 = new ascii().setHeading('Poru Events','Status');
 class AvonEvents {
     constructor(client){
         this.client = client;
@@ -15,6 +16,14 @@ class AvonEvents {
             table.addRow(name,'✅');
         });
         console.log(table.toString());
+        readdirSync(`./src/events/poru/`).forEach(f => {
+            let event = new (require(`../events/poru/${f}`))(this.client);
+            const run = event.run.bind(event);
+            this.client.poru.on(event.name,run);
+            let name = f.split('.')[0];
+            table2.addRow(name,"✅");
+        });
+        console.log(table2.toString());
         this.load = true;
         return this;
     }

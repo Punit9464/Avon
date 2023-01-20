@@ -5,7 +5,7 @@
     "fs": "^0.0.1-security",
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
-    "poru": "^4.1.0",
+    "poru": "^3.5.1",
     "quickmongo": "^5.2.0",
     "uuid": "^9.0.0"
   }

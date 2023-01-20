@@ -4,7 +4,7 @@ const { User , Channel , Reaction , Message , GuildMember } = Partials;
 const { Poru } = require(`poru`);
 const { errors } = require(`../../config.json`);
 const { Database } = require("quickmongo");
-const EventHandler = require("./avonEvents");
+const AvonEvents = require("./avonEvents");
 const AvonCommands = require("./CommandHandler");
 const web = new WebhookClient({url : errors});
 class Avon extends Client {
@@ -32,7 +32,7 @@ class Avon extends Client {
                 playelistLimit : 5
             }
         });
-        this.events = new EventHandler(this).loadEvents();
+        this.events = new AvonEvents(this).loadEvents();
         this.login(this.config.token);
         process.on('unhandledRejection',async(er) => {
             console.error(er);
