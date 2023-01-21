@@ -8,6 +8,9 @@ class Restart extends AvonCommand{
     get aliases(){
         return ['replay'];
     }
+    get cat(){
+        return 'music'
+    }
     get player(){
         return true;
     }

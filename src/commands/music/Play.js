@@ -7,6 +7,9 @@ class Play extends AvonCommand{
     get aliases(){
         return ['p','play']
     }
+    get cat(){
+        return 'music'
+    }
     get inVoice(){
         return true;
     }

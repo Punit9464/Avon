@@ -14,6 +14,9 @@ class Connect extends AvonCommand{
     get inVoice(){
         return true;
     }
+    get cat(){
+        return 'music'
+    }
     get sameVoice(){
         return false;
     }

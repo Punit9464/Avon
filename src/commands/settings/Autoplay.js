@@ -11,6 +11,9 @@ class Autoplay extends AvonCommand{
     get player(){
         return true;
     }
+    get cat(){
+        return 'set'
+    }
     get inVoice(){
         return true
     }

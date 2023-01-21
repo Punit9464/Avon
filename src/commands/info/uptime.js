@@ -8,6 +8,9 @@ class Uptime extends AvonCommand{
     get aliases(){
         return ['upt']
     }
+    get cat(){
+        return 'info'
+    }
     async run(client,message,args,prefix){
         let uptime = moment.duration(message.client.uptime).format(`D[days], H[hrs], m[mins], s[secs]`);
         return message.channel.send({content : `${client.emoji.uptime} | My Uptime L \`${uptime}\``});

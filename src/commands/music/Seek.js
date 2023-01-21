@@ -8,6 +8,9 @@ class Seek extends AvonCommand{
     get aliases(){
         return ['']
     }
+    get cat(){
+        return 'music'
+    }
     get player(){
         return true;
     }

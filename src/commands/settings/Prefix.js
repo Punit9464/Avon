@@ -5,6 +5,9 @@ class Prefix extends AvonCommand{
     get name(){
         return 'setprefix'
     }
+    get cat(){
+        return 'set'
+    }
     get aliases(){
         return ['prefix','set-prefix']
     }

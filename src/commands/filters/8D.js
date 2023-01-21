@@ -11,6 +11,9 @@ class Rotation extends AvonCommand{
     get player(){
         return true
     }
+    get cat(){
+        return 'filters'
+    }
     get inVoice(){
         return true
     }

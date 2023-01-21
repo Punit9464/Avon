@@ -6,6 +6,7 @@ class PlayerDestroy extends AvonClientEvent{
         return 'playerDestroy'
     }
     async run(player){
+        try{ player.message.delete() } catch(e) { }
         let guild = this.client.guilds.cache.get(player.guildId);
         if(!guild) return;
         let db = await this.client.data.get(`${guild.id}-247`);

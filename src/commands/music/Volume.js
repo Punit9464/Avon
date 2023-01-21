@@ -11,6 +11,9 @@ class Volume extends AvonCommand{
     get player(){
         return false;
     }
+    get cat(){
+        return 'music'
+    }
     get inVoice(){
         return true;
     }

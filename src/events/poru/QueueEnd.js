@@ -7,6 +7,7 @@ class QueueEnd extends AvonClientEvent{
     }
     async run(player){
         try{
+            player.message.delete();
         let ch = this.client.channels.cache.get(player.textChannel);
         player.message?.delete().catch((e) => {});
         if(player.autoplay === `true`) return;

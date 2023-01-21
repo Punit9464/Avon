@@ -11,6 +11,9 @@ class Resume extends AvonCommand{
     get player(){
         return true
     }
+    get cat(){
+        return 'music'
+    }
     get inVoice(){
         return true
     }

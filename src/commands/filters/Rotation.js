@@ -13,6 +13,9 @@ class Rotation extends AvonCommand{
     get sameVoice(){
         return true;
     }
+    get cat(){
+        return 'filters'
+    }
     get player(){
         return true;
     }

@@ -8,6 +8,9 @@ class twentyfourseven extends AvonCommand{
     get aliases(){
         return ['24-7','twentyfourseven','alwaysvc','24/7']
     }
+    get cat(){
+        return 'set'
+    }
     get player(){
         return true;
     }

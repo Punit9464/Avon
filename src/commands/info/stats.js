@@ -9,6 +9,9 @@ class stats extends AvonCommand{
     get aliases(){
         return ['st','St','Stats']
     }
+    get cat(){
+        return 'info'
+    }
     async run(client,message,args,prefix){
         try{
         let uptime = moment.duration(message.client.uptime).format(`D[days], H[hrs], m[mins], s[secs]`);
