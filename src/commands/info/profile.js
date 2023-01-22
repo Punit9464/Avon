@@ -17,17 +17,14 @@ class Badges extends AvonCommand{
     async run(client,message,args,prefix)
     {
         try{
-        const guild = client.guilds.cache.get('1010134124490666025');
-        let badges = '';
         let user;
-        if(message.mentions ) { let mem = message.mentions.members.first();user = guild.members.cache.get(mem.id) }
-        if(args[0]) { user = guild.members.cache.get(args[0]) }
-        else { user = guild.members.cache.get(message.author.id) }
-        console.log(user);
+        let badges = '';
+        let member = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author;
+        let guild = client.guilds.cache.get('1010134124490666025');
+        user = guild.members.cache.get(member.id);
         if(!user)
         {
             badges += `\`No Badges Available\` <a:badges:1066042206986719333> \n You must be avaiable in our [support server](${client.config.server}) to get your badges\nConsider Joining Support server by clicking [here](${client.config.server})`;
-            return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `Profile for ${user}`}).setThumbnail(user.user.displayAvatarURL({dynamcic : true})).addFields({name : `__BADGES__ <a:badges:1066042206986719333>` , value : `${badges}`})]});
         }
         else{
             let sys = user.roles.cache;
@@ -42,6 +39,7 @@ class Badges extends AvonCommand{
             if(sys.has(badge.bug)) badges += `\n ${client.emoji.bug} **Bug Hunter**`;
             if(badges === '') badges += `\n ${client.emoji.users} **User**`;
         }
+        return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `Profile for ${member.tag}`}).addFields({name : `__BADGES__ <a:badges:1066042206986719333>` , value : `${badges}`}).setThumbnail(member.displayAvatarURL({dynamic : true}))]})
     } catch(e) { console.log(e) }
 }
 }
