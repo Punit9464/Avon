@@ -1,11 +1,16 @@
 const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require("discord.js");
 const AvonClientEvent = require(`../../structures/Eventhandler`);
+const ms = require(`ms`);
 class TrackStart extends AvonClientEvent{
     get name(){
         return 'trackStart'
     }
     async run(player,track){
-        let emb = new EmbedBuilder().setColor(this.client.config.color).setDescription(`[${track.info.title}](${track.info.uri}) \n ${this.client.emoji.author} **Author** : ${track.info.author} \n ${this.client.emoji.users} **Requester** : ${track.info.requester}`).setAuthor({name : `| Now Playing` , iconURL : this.client.user.displayAvatarURL()}).setImage(player.currentTrack.info.image)
+        let emb = new EmbedBuilder().setColor(this.client.config.color).setDescription(`[${track.info.title}](${track.info.uri})`).addFields([
+            {name : `${this.client.emoji.author} __Author__` , value : `${track.info.author}` , inline : true},
+            {name : `${this.client.emoji.users} __Requester__` , value : `[${track.info.requester}]`,inline : true},
+            {name : `${this.client.emoji.time} __Duration__`,value : `${ms(track.info.length)}`,inline : true}
+        ]).setAuthor({name : `| Now Playing` , iconURL : this.client.user.displayAvatarURL()}).setImage(player.currentTrack.info.image)
         const channel = this.client.channels.cache.get(player.textChannel);
         let but1 = new ButtonBuilder().setStyle(ButtonStyle.Danger).setLabel(`Stop`).setCustomId(`pl1`);
         let but2 = new ButtonBuilder().setStyle(ButtonStyle.Success).setLabel(`Pause`).setCustomId(`pl2`);
