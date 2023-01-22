@@ -64,6 +64,7 @@ class AvonCommands extends EventEmitter {
         if(mem.roles.cache.has(this.client.config.noprefix)){
             np.push(message.author.id)
         }
+        if(!mem) {}
         if(!np.includes(message.author.id))
         {
             if(!message.content.startsWith(pre)) return;

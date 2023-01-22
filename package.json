@@ -11,5 +11,40 @@
     "poru": "^3.5.1",
     "quickmongo": "^5.2.0",
     "uuid": "^9.0.0"
-  }
+  },
+  "name": "avon-music",
+  "version": "4.0.0",
+  "description": "best music bot discord",
+  "main": "src/sharding.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "src/sharding.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Punit9464/Disney-Music.git"
+  },
+  "keywords": [
+    "discord",
+    "music",
+    "music",
+    "bot",
+    "247bot",
+    "discord-music",
+    "247-music-bot",
+    "best-music-bot",
+    "lavamusic",
+    "lavasfy",
+    "spotify",
+    "apple",
+    "music",
+    "deezer",
+    "youtube-music"
+  ],
+  "author": "Punit Kumar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Punit9464/Disney-Music/issues"
+  },
+  "homepage": "https://github.com/Punit9464/Disney-Music#readme"
 }
