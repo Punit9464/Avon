@@ -1,9 +1,9 @@
 {
     "token" : "MTAyNzA2ODM4ODExMzEyNTQ1Nw.GD5Rxt.fsBqtI2Lruk394qNn6V0jtAwCxSk2pcQFrFbRo",
-    "prefix" : "$",
-    "color" : "#2f3136",
-    "owners" : [],
-    "mongourl" : "mongodb+srv://jamura:yuvrajisking@cluster0.bd33f.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "prefix" : "+",
+    "color" : "#ff0000",
+    "owners" : ["765841266181144596","763992862857494558"],
+    "mongourl" : "mongodb+srv://punitkumar:vZ5OczhoKVCILnUc@avon.tmmpm47.mongodb.net/?retryWrites=true&w=majority",
     "errors" : "https://discord.com/api/webhooks/1064219360413110312/iMxTGe8Rx0sWapnFFY1nofbL2Ox6cMFlFFyBE-hrvrgVLxxQF9ICOvlODuf1Z4k09g90",
     "spotifyId" : "ada2f0339dd340df9aa14c76f33f84f3",
     "spotifySecret" : "9fd6d604c0f343b4a998839f43ef88c7",
