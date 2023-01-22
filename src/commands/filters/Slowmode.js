@@ -1,8 +1,8 @@
 const AvonCommand = require("../../structures/avonCommand");
 const { EmbedBuilder } = require(`discord.js`);
-class Rotation extends AvonCommand{
+class Slowmode extends AvonCommand{
     get name(){
-        return 'rotation'
+        return 'slowmode'
     }
     get aliases(){
         return null;
@@ -20,8 +20,8 @@ class Rotation extends AvonCommand{
         return true;
     }
     async run(client,message,args,prefix,player){
-        player.filters.setRotation(!player.filters.rotation);
-        return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| ${player.filters.rotation ? `Enabled` : `Disabled`} Rotation mode of the player`,iconURL : message.author.displayAvatarURL({dynamic : true})})]})
+        player.filters.setSlowmode(!player.filters.slowmode);
+        return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| ${player.filters.slowmode ? `Enabled` : `Disabled`} Slowmode mode of the player`,iconURL : message.author.displayAvatarURL({dynamic : true})})]})
     }
 }
-module.exports = Rotation;
+module.exports = Slowmode;

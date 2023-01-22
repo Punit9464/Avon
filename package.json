@@ -4,8 +4,10 @@
     "ascii-table": "^0.0.9",
     "discord.js": "^14.7.1",
     "fs": "^0.0.1-security",
+    "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
+    "ms": "^2.1.3",
     "poru": "^3.5.1",
     "quickmongo": "^5.2.0",
     "uuid": "^9.0.0"

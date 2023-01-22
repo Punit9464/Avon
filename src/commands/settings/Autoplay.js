@@ -22,20 +22,15 @@ class Autoplay extends AvonCommand{
     }
     async run(client,message,args,prefix,player){
         try{
-        if(!message.member.permissions.has(PermissionsBitField.Flags.ManageGuild) && !client.config.owners.includes(message.author.id)){
-            return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| You are lacking permissions`,iconURL : message.author.displayAvatarURL({dynamic : true})})]})
-        }
-        if(player.autoplay === `false`){
-            try{
-                await player.autoplay(`true`);
+            let data = await client.data.get(`${message.guild.id}-autoPlay`);
+            if(!data || data === null) client.data.set(`${message.guild.id}-autoPlay`,`disabled`);
+        if(data === `disabled`){
+                client.data.set(`${message.guild.id}-autoPlay`,`enabled`);
                 return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| Autoplay has been enabled in this guild` ,iconURL : message.author.displayAvatarURL({dynamic : true})})]})
-            } catch(e) { return message.reply({content : `[Error] : ${e.message}`})}
         }
-        if(player.autoplay === `true`){
-            try{
-                await player.autoplay(`false`);
+        if(data === `enabled`){
+                client.data.set(`${message.guild.id}-autoPlay`,`disabled`);
                 return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| Autoplay has been disabled in this guild` ,iconURL : message.author.displayAvatarURL({dynamic : true})})]})
-            } catch(e) { return message.reply({content : `[Error] : ${e.message}`})}
         }
     } catch(e) { console.log(e) }
     }

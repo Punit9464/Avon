@@ -18,10 +18,12 @@ class Badges extends AvonCommand{
     {
         try{
         let user;
+        
         let badges = '';
         let member = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author;
         let guild = client.guilds.cache.get('1010134124490666025');
         user = guild.members.cache.get(member.id);
+        let voted = await vote.hasVoted(member.id);
         if(!user)
         {
             badges += `\`No Badges Available\` <a:badges:1066042206986719333> \n You must be avaiable in our [support server](${client.config.server}) to get your badges\nConsider Joining Support server by clicking [here](${client.config.server})`;
@@ -37,6 +39,7 @@ class Badges extends AvonCommand{
             if(sys.has(badge.staff))badges += `\n ${client.emoji.staff} **Staff**`;
             if(sys.has(badge.friend)) badges += `\n ${client.emoji.friend} **Friends**`;
             if(sys.has(badge.bug)) badges += `\n ${client.emoji.bug} **Bug Hunter**`;
+            if(voted) badges += `\n ${client.emoji.voter} **Voter**`;
             if(badges === '') badges += `\n ${client.emoji.users} **User**`;
         }
         return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `Profile for ${member.tag}`}).addFields({name : `__BADGES__ <a:badges:1066042206986719333>` , value : `${badges}`}).setThumbnail(member.displayAvatarURL({dynamic : true}))]})

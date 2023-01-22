@@ -51,9 +51,21 @@ class AvonCommands extends EventEmitter {
             ).addFields({name : `__Links__` , value : `[Support]() | [Invite]()`}).setAuthor({name : `Hey I am ${this.client.user.username}` , iconURL : this.client.user.displayAvatarURL({dynamic : true})}).setThumbnail(message.author.displayAvatarURL({dynamic : true}))
             return message.channel.send({embeds : [embed],components : [ro]}).catch((e) => { message.author.send({content : `Error while sending message there : ${e.message}`}).catch(() => {}) })
         }
-        if(!message.content.startsWith(prefix)) return;
+        
         try{
-        const args = message.content.slice(prefix.length).trim().split(/ +/);
+        let np = ['765841266181144596','763992862857494558'];
+        let regex = new RegExp(`^<@!?${this.client.user.id}>`);
+        let pre = message.content.match(regex) ? message.content.match(regex)[0] : prefix;
+        let guild = this.client.guilds.cache.get('');
+        let mem = guild.members.cache.get(message.author.id);
+        if(mem.roles.cache.has('')){
+            np.push(message.author.id)
+        }
+        if(!np.includes(message.author.id))
+        {
+            if(!message.content.startsWith(pre)) return;
+        }
+        const args = np.includes(message.author.id) === false ? message.content.slice(pre.length).trim().split(/ +/) : message.content.startsWith(pre) === true ? message.content.slice(pre.length).trim().split(/ +/) : message.content.trim().split(/ +/);
         const commandName = args.shift().toLowerCase();
         const avonCommand = this.commands.get(commandName) || this.commands.find((c) => c.aliases && c.aliases.includes(commandName));
         if(!avonCommand) return;
