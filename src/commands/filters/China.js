@@ -7,6 +7,9 @@ class China extends AvonCommand{
     get aliases(){
         return null;
     }
+    get vote(){
+        return true;
+    }
     get inVoice(){
         return true;
     }

@@ -17,6 +17,9 @@ class Autoplay extends AvonCommand{
     get inVoice(){
         return true
     }
+    get vote(){
+        return true;
+    }
     get same(){
         return true
     }

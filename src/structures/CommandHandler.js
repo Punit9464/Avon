@@ -2,7 +2,10 @@ const { Collection , ButtonBuilder , ActionRowBuilder , ButtonStyle , EmbedBuild
 const EventEmitter = require('events');
 const { readdirSync } = require('fs');
 const ascii = require(`ascii-table`);
+const config = require(`../../config.json`);
 const table = new ascii().setHeading('Avon Commands','Status');
+const top = require(`@top-gg/sdk`);
+const vote = new top.Api(config.topggapi);
 class AvonCommands extends EventEmitter {
     constructor(client){
         super();
@@ -56,9 +59,9 @@ class AvonCommands extends EventEmitter {
         let np = ['765841266181144596','763992862857494558'];
         let regex = new RegExp(`^<@!?${this.client.user.id}>`);
         let pre = message.content.match(regex) ? message.content.match(regex)[0] : prefix;
-        let guild = this.client.guilds.cache.get('');
+        let guild = this.client.guilds.cache.get('1010134124490666025');
         let mem = guild.members.cache.get(message.author.id);
-        if(mem.roles.cache.has('')){
+        if(mem.roles.cache.has(this.client.config.noprefix)){
             np.push(message.author.id)
         }
         if(!np.includes(message.author.id))
@@ -78,6 +81,13 @@ class AvonCommands extends EventEmitter {
         if(avonCommand.sameVoice){
             if(message.guild.members.me.voice.channelId !== message.member.voice.channelId && message.guild.members.me.voice.channel){
                 return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setDescription(`${client.emoji.cross} | You must be connected to ${message.guild.members.me.voice.channel}`)]})
+            }
+        }
+        if(avonCommand.vote)
+        {
+            let voted = await vote.hasVoted(message.author.id);
+            if(!voted && !this.client.config.owners.includes(message.author.id)){
+                return message.channel.send({embeds : [new EmbedBuilder().setColor(config.color).setDescription(`${this.client.emoji.tick} | [Vote](https://top.gg/bot/904317141866647592/vote) Required Click [here](https://top.gg/bot/904317141866647592/vote)`)],components : [new ActionRowBuilder().addComponents(new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel(`Vote`).setURL(`https://top.gg/bot/904317141866647592/vote`))]})
             }
         }
         let player = client.poru.players.get(message.guild.id);

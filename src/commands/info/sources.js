@@ -8,6 +8,9 @@ class Sources extends AvonCommand{
     get aliases(){
         return ['source']
     }
+    get vote(){
+        return true;
+    }
     get cat(){
         return 'info'
     }

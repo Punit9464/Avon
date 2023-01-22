@@ -16,6 +16,9 @@ class Nightcore extends AvonCommand{
     get cat(){
         return 'filters'
     }
+    get vote(){
+        return true;
+    }
     get player(){
         return true;
     }

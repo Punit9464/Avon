@@ -13,6 +13,9 @@ class Settings extends AvonCommand{
     get inVoice(){
         return false;
     }
+    get vote(){
+        return true;
+    }
     get sameVoice(){
         return false;
     }

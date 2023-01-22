@@ -13,6 +13,9 @@ class clearFilters extends AvonCommand{
     get sameVoice(){
         return true;
     }
+    get vote(){
+        return true;
+    }
     get cat(){
         return 'filters'
     }

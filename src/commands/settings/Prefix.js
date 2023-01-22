@@ -8,6 +8,9 @@ class Prefix extends AvonCommand{
     get cat(){
         return 'set'
     }
+    get vote(){
+        return true;
+    }
     get aliases(){
         return ['prefix','set-prefix']
     }
