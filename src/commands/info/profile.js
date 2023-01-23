@@ -25,7 +25,7 @@ class Badges extends AvonCommand{
         user = await guild.members.fetch(member.id).catch((e) =>{ badges += `\`No Badges Available\` <a:badges:1066042206986719333> \n You must be avaiable in our [support server](${client.config.server}) to get your badges\nConsider Joining Support server by clicking [here](${client.config.server})`;}) 
         let voted = await vote.hasVoted(member.id);
     
-        
+        try{
             let sys = user.roles.cache;
             if(sys.has(badge.dev)) badges += `\n ${client.emoji.dev} **Developer**`;
             if(sys.has(badge.owner)) badges += `\n ${client.emoji.owner} **Owner**`;
@@ -37,10 +37,18 @@ class Badges extends AvonCommand{
             if(sys.has(badge.friend)) badges += `\n ${client.emoji.friend} **Friends**`;
             if(sys.has(badge.bug)) badges += `\n ${client.emoji.bug} **Bug Hunter**`;
             if(voted) badges += `\n ${client.emoji.voter} **Voter**`;
-            if(badges === '') badges += `\n ${client.emoji.users} **User**`;
+            if(badges === '') badges += `\n ${client.emoji.users} **User**`; }
+            catch(e) { 
+                badges = '`No Badges Available` <a:badges:1066042206986719333> \n You must be avaiable in our [support server](${client.config.server}) to get your badges\nConsider Joining Support server by clicking [here](${client.config.server})';
+            }
         
         return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `Profile for ${member.tag}`}).addFields({name : `__BADGES__ <a:badges:1066042206986719333>` , value : `${badges}`}).setThumbnail(member.displayAvatarURL({dynamic : true}))]})
-    } catch(e) { console.log(e) }
+    } catch(e) { 
+        console.log(e)
+        let badges = '';
+        badges = `\`No Badges Available\` <a:badges:1066042206986719333> \n You must be avaiable in our [support server](${client.config.server}) to get your badges\nConsider Joining Support server by clicking [here](${client.config.server})`;
+        return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setDescription(`__**BADGES**__ \n \No Badges Available\` <a:badges:1066042206986719333> \n You must be avaiable in our [support server](${client.config.server}) to get your badges\nConsider Joining Support server by clicking [here](${client.config.server})`).setThumbnail(message.author.displayAvatarURL({dynamic : true}))]})
+    }
 }
 }
 module.exports = Badges;
