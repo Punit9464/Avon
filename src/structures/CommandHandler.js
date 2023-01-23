@@ -1,4 +1,4 @@
-const { Collection , ButtonBuilder , ActionRowBuilder , ButtonStyle , EmbedBuilder } = require('discord.js');
+const { Collection , ButtonBuilder , ActionRowBuilder , ButtonStyle , EmbedBuilder, PermissionsBitField } = require('discord.js');
 const EventEmitter = require('events');
 const { readdirSync } = require('fs');
 const ascii = require(`ascii-table`);
@@ -51,25 +51,30 @@ class AvonCommands extends EventEmitter {
                 My prefix here : \`${prefix}\`
                 
                 Try me with this command - \`${prefix}help\` or \`${prefix}play\``
-            ).addFields({name : `__Links__` , value : `[Support]() | [Invite]()`}).setAuthor({name : `Hey I am ${this.client.user.username}` , iconURL : this.client.user.displayAvatarURL({dynamic : true})}).setThumbnail(message.author.displayAvatarURL({dynamic : true}))
+            ).addFields({name : `__Links__` , value : `[Support](${this.client.config.server}) | [Invite](https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}&permissions=415602886720&scope=bot)`}).setAuthor({name : `Hey I am ${this.client.user.username}` , iconURL : this.client.user.displayAvatarURL({dynamic : true})}).setThumbnail(message.author.displayAvatarURL({dynamic : true}))
             return message.channel.send({embeds : [embed],components : [ro]}).catch((e) => { message.author.send({content : `Error while sending message there : ${e.message}`}).catch(() => {}) })
         }
         
         try{
+            if(!message.guild.members.me.permissionsIn(message.channel).has(PermissionsBitField.Flags.ViewChannel)) return;
+            if(!message.guild.members.me.permissionsIn(message.channel).has(PermissionsBitField.Flags.SendMessages)) return message.author.send({content : `I dont have **Send Messages** Permissions in that channel`}).catch(e => null);
+            if(!message.guild.members.me.permissionsIn(message.channel).has(PermissionsBitField.Flags.ReadMessageHistory)) return message.channel.send({content : `I don't have **Read Message History Permissions** here`});
+            if(!message.guild.members.me.permissionsIn(message.channel).has(PermissionsBitField.Flags.UseExternalEmojis)) return message.channel.send({content : `I don't have **Use External Emojis** Permissions here`})
+            if(!message.guild.members.me.permissionsIn(message.channel).has(PermissionsBitField.Flags.EmbedLinks)) return message.channel.send({content : `I don't have **Embed Links** Permissions here`})
         let np = ['765841266181144596','763992862857494558'];
-        let regex = new RegExp(`^<@!?${this.client.user.id}>`);
+        let regex = RegExp(`^<@!?${this.client.user.id}>`);
         let pre = message.content.match(regex) ? message.content.match(regex)[0] : prefix;
-        let guild = this.client.guilds.cache.get('1010134124490666025');
-        let mem = guild.members.cache.get(message.author.id);
-        if(mem.roles.cache.has(this.client.config.noprefix)){
-            np.push(message.author.id)
-        }
-        if(!mem) {}
-        if(!np.includes(message.author.id))
-        {
-            if(!message.content.startsWith(pre)) return;
-        }
-        const args = np.includes(message.author.id) === false ? message.content.slice(pre.length).trim().split(/ +/) : message.content.startsWith(pre) === true ? message.content.slice(pre.length).trim().split(/ +/) : message.content.trim().split(/ +/);
+        if(!np.includes(message.author.id)){ if(!message.content.startsWith(pre)) return;}
+        let data1 = await this.client.data2.get(`noprefix_${message.guild.id}`);
+        if(!data1 || data1 === null) { this.client.data2.set(`noprefix_${message.guild.id}`,[]) }
+        let ok1 = [];
+        data1.forEach(x => ok1.push(x));
+        let data2 = await this.client.data2.get(`noprefix_${this.client.user.id}`);
+        if(!data2) { client.data2.set(`noprefix_${this.client.user.id}`,[]) }
+        data2.forEach(x => ok1.push(x));
+        ok1.forEach(x => np.push(x));
+        if(message.attachments) return;
+        const args = np.includes(message.author.id) == false ? message.content.slice(pre.length).trim().split(/ +/) :  message.content.startsWith(pre) == true ? message.content.slice(pre.length).trim().split(/ +/) : message.content.trim().split(/ +/);
         const commandName = args.shift().toLowerCase();
         const avonCommand = this.commands.get(commandName) || this.commands.find((c) => c.aliases && c.aliases.includes(commandName));
         if(!avonCommand) return;

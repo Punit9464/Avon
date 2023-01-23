@@ -22,6 +22,8 @@ class Avon extends Client {
         this.config = require(`${process.cwd()}/config.json`);
         this.data = new Database(this.config.mongourl);
         this.data.connect();
+        this.data2 = new Database(this.config.mongourl2);
+        this.data2.connect();
         this.poru = new Poru(this,this.config.nodes,{
             spotify : {
                 clientId : this.config.spotifyId,
