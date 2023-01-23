@@ -14,11 +14,13 @@ class stats extends AvonCommand{
     }
     async run(client,message,args,prefix){
         try{
+            const servers = await client.shard.broadcastEval(c => c.guilds.cache.size).then(r => r.reduce((a, b) => a + b, 0))
+            const users = await client.shard.broadcastEval(c => c.guilds.cache.filter(x => x.available).reduce((a, g) =>a + g.memberCount, 0)).then(r => r.reduce((acc, memberCount) => acc + memberCount, 0))
         let uptime = moment.duration(message.client.uptime).format(`D[days], H[hrs], m[mins], s[secs]`);
         let embed = new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| ${client.user.username} Information` , iconURL : client.user.displayAvatarURL()}).setDescription(
             `❯ **Name :** [${client.user.username}](https://discord.com/users/${client.user.id})
-            ❯ **Servers :** ${client.guilds.cache.size} 
-            ❯ **Users :** ${client.guilds.cache.reduce((a,b) => a + b.memberCount,0)}
+            ❯ **Servers :** ${servers} 
+            ❯ **Users :** ${users}
             ❯ **Discord.js :** 14.7.1
             ❯ **Uptime :** ${uptime}`
         ).addFields([
@@ -27,8 +29,8 @@ class stats extends AvonCommand{
         ]).setThumbnail(client.user.displayAvatarURL()).setFooter({text : `Requested By : ${message.author.tag}` , iconURL : message.author.displayAvatarURL({dynamic : true})});
 
         let b1 = new ButtonBuilder().setStyle(ButtonStyle.Danger).setLabel(`${Math.round(client.ws.ping)} ms`).setDisabled(true).setCustomId(`lolok`);
-        let b2 = new ButtonBuilder().setStyle(ButtonStyle.Danger).setLabel(`${client.guilds.cache.reduce((a,b) => a + b.memberCount,0)} Users`).setDisabled(true).setCustomId(`lolbhai`);
-        let b3 = new ButtonBuilder().setStyle(ButtonStyle.Danger).setLabel(`${client.guilds.cache.size} Servers`).setDisabled(true).setCustomId(`bc`);
+        let b2 = new ButtonBuilder().setStyle(ButtonStyle.Danger).setLabel(`${users} Users`).setDisabled(true).setCustomId(`lolbhai`);
+        let b3 = new ButtonBuilder().setStyle(ButtonStyle.Danger).setLabel(`${servers} Servers`).setDisabled(true).setCustomId(`bc`);
 
         let row = new ActionRowBuilder().addComponents(b3,b2,b1);
 
