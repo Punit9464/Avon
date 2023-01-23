@@ -64,16 +64,16 @@ class AvonCommands extends EventEmitter {
         let np = ['765841266181144596','763992862857494558'];
         let regex = RegExp(`^<@!?${this.client.user.id}>`);
         let pre = message.content.match(regex) ? message.content.match(regex)[0] : prefix;
-        if(!np.includes(message.author.id)){ if(!message.content.startsWith(pre)) return;}
         let data1 = await this.client.data2.get(`noprefix_${message.guild.id}`);
-        if(!data1 || data1 === null) { this.client.data2.set(`noprefix_${message.guild.id}`,[]) }
+        if(!data1 || data1 === null)  this.client.data2.set(`noprefix_${message.guild.id}`,[]) 
         let ok1 = [];
         data1.forEach(x => ok1.push(x));
         let data2 = await this.client.data2.get(`noprefix_${this.client.user.id}`);
-        if(!data2) { client.data2.set(`noprefix_${this.client.user.id}`,[]) }
+        if(!data2 || data2 === null)  this.client.data2.set(`noprefix_${this.client.user.id}`,[]) 
         data2.forEach(x => ok1.push(x));
         ok1.forEach(x => np.push(x));
         if(message.attachments) return;
+        if(!np.includes(message.author.id)){ if(!message.content.startsWith(pre)) return;}
         const args = np.includes(message.author.id) == false ? message.content.slice(pre.length).trim().split(/ +/) :  message.content.startsWith(pre) == true ? message.content.slice(pre.length).trim().split(/ +/) : message.content.trim().split(/ +/);
         const commandName = args.shift().toLowerCase();
         const avonCommand = this.commands.get(commandName) || this.commands.find((c) => c.aliases && c.aliases.includes(commandName));

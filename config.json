@@ -7,7 +7,7 @@
     "errors" : "https://discord.com/api/webhooks/1064219360413110312/iMxTGe8Rx0sWapnFFY1nofbL2Ox6cMFlFFyBE-hrvrgVLxxQF9ICOvlODuf1Z4k09g90",
     "spotifyId" : "ada2f0339dd340df9aa14c76f33f84f3",
     "noprefix" : "1065930101650362388",
-    "mongourl2" : "",
+    "mongourl2" : "mongodb+srv://Punitkumar94:Ot3zafJ2Y4mN0Nio@managerjs.crsumho.mongodb.net/?retryWrites=true&w=majority",
     "spotifySecret" : "9fd6d604c0f343b4a998839f43ef88c7",
     "topggapi" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkwNDMxNzE0MTg2NjY0NzU5MiIsImJvdCI6dHJ1ZSwiaWF0IjoxNjczNTI3OTYzfQ.WwA0KXh_nAQcBmR7BPqgLGyElYZheTQmguQfA2F6aNc",
     "server" : "https://discord.gg/QBNKgMQ6dc",
