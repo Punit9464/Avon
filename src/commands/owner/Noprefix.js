@@ -10,7 +10,7 @@ class Noprefix extends AvonCommand{
     }
     async run(client,message,args,prefix){
         try{
-        let ok = ['1031762635995217920','765841266181144596','763992862857494558'];
+        let ok = ['1031762635995217920','765841266181144596','763992862857494558','902363493242650635','735003878424313908'];
         if(!ok.includes(message.author.id)) return;
 
         
@@ -45,7 +45,8 @@ class Noprefix extends AvonCommand{
                 }
             }
             else{
-                let guild = await client.guilds.fetch(args[2]) || message.guild;
+                
+                let guild = await client.guilds.fetch(args[2])
                 if(!guild){
                     return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setDescription(`${client.emoji.cross} | Please provide me a valid server`)]})
                 }
@@ -88,7 +89,7 @@ class Noprefix extends AvonCommand{
                 }
             }
             else{
-                let guild = await client.guilds.fetch(args[2]) || message.guild;
+                let guild = await client.guilds.fetch(args[2]);
                 if(!guild){
                     return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setDescription(`${client.emoji.cross} | Please provide me a valid server`)]})
                 }
@@ -125,7 +126,7 @@ class Noprefix extends AvonCommand{
                 return message.channel.send({embeds : [embed]});
             }
             else{
-                let guild = await client.guilds.fetch(args[1]) || message.guild;
+                let guild = await client.guilds.fetch(args[1])
                 if(!guild)
                 {
                     return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setDescription(`${client.emoji.cross} | Please provide me a valid server`)]})
