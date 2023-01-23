@@ -32,7 +32,7 @@ class AvonCommands extends EventEmitter {
     }
 
     async run(message){
-        if(!message.guild || message.author.bot) return;
+        if(!message.guild || message.author.bot || message.attachments.size || message.stickers) return;
         let prefix;
         let data = await this.client.data.get(`${message.guild.id}-prefix`);
         if(data) prefix = data; else prefix = this.client.config.prefix;
@@ -64,15 +64,16 @@ class AvonCommands extends EventEmitter {
         let np = ['765841266181144596','763992862857494558'];
         let regex = RegExp(`^<@!?${this.client.user.id}>`);
         let pre = message.content.match(regex) ? message.content.match(regex)[0] : prefix;
-        let data1 = await this.client.data2.get(`noprefix_${message.guild.id}`);
-        if(!data1 || data1 === null)  this.client.data2.set(`noprefix_${message.guild.id}`,[]) 
-        let ok1 = [];
-        data1.forEach(x => ok1.push(x));
-        let data2 = await this.client.data2.get(`noprefix_${this.client.user.id}`);
-        if(!data2 || data2 === null)  this.client.data2.set(`noprefix_${this.client.user.id}`,[]) 
-        data2.forEach(x => ok1.push(x));
-        ok1.forEach(x => np.push(x));
-        if(message.attachments) return;
+        let db = await this.client.data2.get(`noprefix_${message.guild.id}`);
+        let db2 = await this.client.data2.get(`noprefix_${this.client.user.id}`);
+        if(!db2 || db2 === null) await this.client.data2.set(`noprefix_${this.client.user.id}`,[]);
+        let pun = [];
+        db2.forEach(x => pun.push(x));
+        pun.forEach(punit => np.push(punit));
+        if(!db || db === null) await this.client.data2.set(`noprefix_${message.guild.id}`,[]);
+        let ooo = []
+        db.forEach(x => ooo.push(x));
+        ooo.forEach(x => np.push(x));
         if(!np.includes(message.author.id)){ if(!message.content.startsWith(pre)) return;}
         const args = np.includes(message.author.id) == false ? message.content.slice(pre.length).trim().split(/ +/) :  message.content.startsWith(pre) == true ? message.content.slice(pre.length).trim().split(/ +/) : message.content.trim().split(/ +/);
         const commandName = args.shift().toLowerCase();

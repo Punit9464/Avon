@@ -20,13 +20,14 @@ class Noprefix extends AvonCommand{
         }
 
         let op = args[0].toLowerCase();
-        let pk = args[2].toLowerCase();
+        
         if(op === `add`)
         {
             let us = message.mentions.members.first() || message.guild.members.cache.get(args[1]);
             if(!us){
                 return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setDescription(`${client.emoji.cross} | Please provide me a valid user`)]})
             }
+            let pk = args[2]
             if(pk === `all`)
             {
                 let db = await client.data2.get(`noprefix_${client.user.id}`);
@@ -69,6 +70,7 @@ class Noprefix extends AvonCommand{
             if(!us){
                 return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setDescription(`${client.emoji.cross} | Please provide me a valid user`)]})
             }
+            let pk = args[2]
             if(pk === `all`)
             {
                 let db = await client.data2.get(`noprefix_${client.user.id}`);
@@ -107,10 +109,11 @@ class Noprefix extends AvonCommand{
         }
         if(op === `show` || op === `list`)
         {
+            let pk = args[1]
             if(pk === `all`)
             {
                 let db = await client.data2.get(`noprefix_${client.user.id}`);
-                if(!db || db === null || db.length === '0')
+                if(!db || db === null)
                 {
                     return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setDescription(`${client.emoji.cross} | No Users.`)]})
                 }
@@ -122,13 +125,13 @@ class Noprefix extends AvonCommand{
                 return message.channel.send({embeds : [embed]});
             }
             else{
-                let guild = await client.guilds.fetch(args[2]) || message.guild;
+                let guild = await client.guilds.fetch(args[1]) || message.guild;
                 if(!guild)
                 {
                     return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setDescription(`${client.emoji.cross} | Please provide me a valid server`)]})
                 }
                 let db = await client.data.get(`noprefix_${guild.id}`);
-                if(!db || db === null || db.length === '0')
+                if(!db || db === null)
                 {
                     return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setDescription(`${client.emoji.cross} | No Users`)]})
                 }
