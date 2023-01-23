@@ -32,7 +32,7 @@ class AvonCommands extends EventEmitter {
     }
 
     async run(message){
-        if(!message.guild || message.author.bot || message.attachments.size || message.stickers) return;
+        if(!message.guild || message.author.bot || message.attachments.size || message.stickers.size) return;
         let prefix;
         let data = await this.client.data.get(`${message.guild.id}-prefix`);
         if(data) prefix = data; else prefix = this.client.config.prefix;

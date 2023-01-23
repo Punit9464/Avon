@@ -20,10 +20,6 @@ class Avon extends Client {
         this.AvonCommands = new AvonCommands(this).loadCommands();
         this.emoji = require(`${process.cwd()}/emoji.json`);
         this.config = require(`${process.cwd()}/config.json`);
-        this.data = new Database(this.config.mongourl);
-        this.data.connect();
-        this.data2 = new Database(this.config.mongourl2);
-        this.data2.connect();
         this.poru = new Poru(this,this.config.nodes,{
             spotify : {
                 clientId : this.config.spotifyId,
@@ -35,6 +31,10 @@ class Avon extends Client {
             }
         });
         this.events = new AvonEvents(this).loadEvents();
+        this.data = new Database(this.config.mongourl);
+        this.data.connect();
+        this.data2 = new Database(this.config.mongourl2);
+        this.data2.connect();
         this.login(this.config.token);
         process.on('unhandledRejection',async(er) => {
             console.error(er);
