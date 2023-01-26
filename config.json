@@ -13,9 +13,9 @@
     "server" : "https://discord.gg/QBNKgMQ6dc",
     "nodes" : [{
         "name" : "Avon",
-        "host" : "149.129.215.50",
+        "host" : "lavalink.clxud.lol",
         "port" : 2333,
-        "password" : "alfarimusic",
+        "password" : "youshallnotpass",
         "secure" : false
     }]
 }

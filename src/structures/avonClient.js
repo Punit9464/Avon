@@ -6,6 +6,7 @@ const { errors } = require(`../../config.json`);
 const { Database } = require("quickmongo");
 const AvonEvents = require("./avonEvents");
 const AvonCommands = require("./CommandHandler");
+const { Spotify } = require("poru-spotify");
 const web = new WebhookClient({url : errors});
 class Avon extends Client {
     constructor(){
@@ -21,20 +22,16 @@ class Avon extends Client {
         this.emoji = require(`${process.cwd()}/emoji.json`);
         this.config = require(`${process.cwd()}/config.json`);
         this.poru = new Poru(this,this.config.nodes,{
-            spotify : {
-                clientId : this.config.spotifyId,
-                clientSecret : this.config.spotifySecret,
-                playelistLimit : 5
-            },
             apple : {
-                playelistLimit : 5
-            }
+                playlistLimit : 5
+            },
+            plugins : [new Spotify({clientID : this.config.spotifyID,clientSecret : this.config.spotifySecret})],
         });
-        this.events = new AvonEvents(this).loadEvents();
         this.data = new Database(this.config.mongourl);
         this.data.connect();
         this.data2 = new Database(this.config.mongourl2);
         this.data2.connect();
+        this.events = new AvonEvents(this).loadEvents();
         this.login(this.config.token);
         process.on('unhandledRejection',async(er) => {
             console.error(er);
