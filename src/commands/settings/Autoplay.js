@@ -1,41 +1,43 @@
 const { PermissionsBitField, EmbedBuilder } = require("discord.js");
-const AvonCommand = require("../../structures/avonCommand");
+const AvonCommand = require("../../structures/avonCommand")
 
-class Autoplay extends AvonCommand{
+class autoPlay extends AvonCommand{
     get name(){
-        return 'autoplay'
+        return 'autoplay';
     }
     get aliases(){
-        return ['ap'];
+        return ['ap','auto']
     }
-    get player(){
+    get vote(){
         return true;
     }
     get cat(){
         return 'set'
     }
-    get inVoice(){
-        return true
-    }
-    get vote(){
+    get player(){
         return true;
     }
-    get same(){
-        return true
+    get inVoice(){
+        return true;
     }
-    async run(client,message,args,prefix,player){
-        try{
-            let data = await client.data.get(`${message.guild.id}-autoPlay`);
-            if(!data || data === null) client.data.set(`${message.guild.id}-autoPlay`,`disabled`);
+    get sameVoice(){
+        return true;
+    }
+    async run(client,message,args,prefix){
+        let data = await client.data.get(`${message.guild.id}-autoPlay`);
+        if(!data) await client.data.set(`${message.guild.id}-autoPlay`,`disabled`);
         if(data === `disabled`){
-               await  client.data.set(`${message.guild.id}-autoPlay`,`enabled`);
-                return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| Autoplay has been enabled in this guild` ,iconURL : message.author.displayAvatarURL({dynamic : true})})]})
+            client.data.set(`${message.guild.id}-autoPlay`,`enabled`);
+            return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| Enabled Autoplay Mode of ${client.user.username}` , iconURL : message.author.displayAvatarURL({dynamic : true})})]})
         }
-        if(data === `enabled`){
-                await client.data.set(`${message.guild.id}-autoPlay`,`disabled`);
-                return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| Autoplay has been disabled in this guild` ,iconURL : message.author.displayAvatarURL({dynamic : true})})]})
+        else if(data === `enabled`){
+            client.data.set(`${message.guild.id}-autoPlay`,`disabled`);
+            return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| Disabled Autoplay Mode of ${client.user.username}` , iconURL : message.author.displayAvatarURL({dynamic : true})})]})
         }
-    } catch(e) { console.log(e) }
+        else{
+            client.data.set(`${message.guild.id}-autoPlay`,`disabled`);
+            return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| Please try again running that command` , iconURL : message.author.displayAvatarURL({dynamic : true})})]})
+        }
     }
 }
-module.exports = Autoplay;
+module.exports = autoPlay;

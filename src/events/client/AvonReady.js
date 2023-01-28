@@ -36,7 +36,7 @@ class AvonReady extends AvonClientEvent{
                 this.client.data.delete(`${guild.id}-voice`);
                 this.client.data.delete(`${guild.id}-text`);
             }
-            else if(data === `enabled`)
+            else if(db === `enabled`)
             {
                 let voiceChannel = guild.channels.cache.get(await this.client.data.get(`${guild.id}-voice`));
                 if(!voiceChannel){
