@@ -35,6 +35,10 @@ class Play extends AvonCommand{
             player.setTextChannel(message.channel.id);
             let search = args.join(" ");
             if(search.startsWith('https://')){
+                if(search.includes(`https://youtube.com/`) || search.includes(`https://youtu.be/`))
+                {
+                    return message.channel.send({embeds : [new EmbedBuilder().setColor(client.config.color).setDescription(`${client.emoji.cross} | Sorry we don't support youtube urls.`)]});
+                }
                 let resolve = await client.poru.resolve(search);
                         const { playlistInfo , tracks , loadType } = resolve;
 
@@ -81,7 +85,7 @@ class Play extends AvonCommand{
                 {
                     if(interaction.customId === `def`)
                     {
-                        let resolve = await client.poru.resolve({query : search , source : "ytsearch"});
+                        let resolve = await client.poru.resolve(search);
                         const { playlistInfo , tracks , loadType } = resolve;
 
                         if(loadType === `PLAYLIST_LOADED`){
@@ -110,7 +114,7 @@ class Play extends AvonCommand{
                     }
                     if(interaction.customId === `spoti`)
                     {
-                        let resolve = await client.poru.resolve({query : search , source : "spotify"});
+                        let resolve = await client.poru.spotify.fetch(search);
                         const { playlistInfo , tracks , loadType } = resolve;
 
                         if(loadType === `PLAYLIST_LOADED`){
@@ -138,7 +142,7 @@ class Play extends AvonCommand{
                     }
                     if(interaction.customId === `sc`)
                     {
-                       try{ let resolve = await client.poru.resolve({query : search , source : "scsearch"}) 
+                       try{ let resolve = await client.poru.soundcloud.fetch(search) 
                         const { playlistInfo , tracks , loadType } = resolve;
 
                         if(loadType === `PLAYLIST_LOADED`){
