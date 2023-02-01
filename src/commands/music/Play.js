@@ -81,7 +81,7 @@ class Play extends AvonCommand{
                 {
                     if(interaction.customId === `def`)
                     {
-                        let resolve = await client.poru.resolve(search);
+                        let resolve = await client.poru.resolve({query : search , source : "ytsearch"});
                         const { playlistInfo , tracks , loadType } = resolve;
 
                         if(loadType === `PLAYLIST_LOADED`){
@@ -110,7 +110,7 @@ class Play extends AvonCommand{
                     }
                     if(interaction.customId === `spoti`)
                     {
-                        let resolve = await client.poru.spotify.fetch(search);
+                        let resolve = await client.poru.resolve({query : search , source : "spotify"});
                         const { playlistInfo , tracks , loadType } = resolve;
 
                         if(loadType === `PLAYLIST_LOADED`){
@@ -138,7 +138,7 @@ class Play extends AvonCommand{
                     }
                     if(interaction.customId === `sc`)
                     {
-                       try{ let resolve = await client.poru.soundcloud.fetch(search) } catch(e) { return interaction.update({components : [] ,embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| Failed , try other sources please` ,iconURL : message.author.displayAvatarURL({dynamic : true})})]})}
+                       try{ let resolve = await client.poru.resolve({query : search , source : "scsearch"}) 
                         const { playlistInfo , tracks , loadType } = resolve;
 
                         if(loadType === `PLAYLIST_LOADED`){
@@ -163,6 +163,7 @@ class Play extends AvonCommand{
                             let no = new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| No Results found for the given query`,iconURL : message.guild.iconURL({dynamic : true})});
                             return interaction.update({embeds : [no],components : []});
                         }
+                    } catch(e) { return interaction.update({components : [] ,embeds : [new EmbedBuilder().setColor(client.config.color).setAuthor({name : `| Failed , try other sources please` ,iconURL : message.author.displayAvatarURL({dynamic : true})})]})}
                     }
                     if(interaction.customId === `deezer`)
                     {

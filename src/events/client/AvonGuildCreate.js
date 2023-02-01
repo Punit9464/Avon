@@ -13,7 +13,6 @@ class AvonGuildCreate extends AvonClientEvent{
     let embed = new EmbedBuilder().setColor(this.client.config.color).setAuthor({name : `| GUILD JOINED`,iconURL : this.client.user.displayAvatarURL()}).setDescription(
         `**Server Name :** ${guild.name} | **ID :** ${guild.id}
         **MemberCount :** ${guild.memberCount} Members
-        **Invite :** https://discord.gg/${invite.code}
         **Guild Created :** <t:${Math.round(guild.createdTimestamp/1000)}:R> | **Guild Joined :** <t:${Math.round(guild.joinedTimestamp/1000)}:R>
         **Owner Info** : ${guild.members.cache.get(owner.id) ? guild.members.cache.get(owner.id).user.tag : 'Hoga koi mujhe kya'}
         **Servers Count :** ${this.client.guilds.cache.size}
