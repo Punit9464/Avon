@@ -20,28 +20,15 @@ class Avon extends Client {
             }
         });
         this.poru = new Poru(this,config.nodes,{
-            apple : {
-                playlistLimit : 5
-            },
             plugins : [new Spotify({clientID : config.spotifyID,clientSecret : config.spotifySecret, playlistLimit : 5})],
         });
         this.data = new Database(config.mongourl);
         this.data.connect();
-        this.data2 = new Database(config.mongourl2);
-        this.data2.connect();
         this.emoji = require(`${process.cwd()}/emoji.json`);
         this.config = require(`${process.cwd()}/config.json`);
         this.AvonCommands = new AvonCommands(this).loadCommands();
         this.events = new AvonEvents(this).loadEvents();
         this.login(this.config.token);
-        process.on('unhandledRejection',async(er) => {
-            console.error(er);
-            web.send({embeds : [new EmbedBuilder().setColor(`#2f3136`).setDescription(`\`\`\`js\n${er}\`\`\``)]});
-        });
-        process.on('uncaughtException',async(err) => {
-            console.error(err);
-            web.send({embeds : [new EmbedBuilder().setColor(`#2f3136`).setDescription(`\`\`\`js\n${err}\`\`\``)]});
-        });
     }
     
 }
