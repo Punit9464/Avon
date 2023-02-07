@@ -29,7 +29,6 @@ class Help extends AvonCommand{
         let b3 = new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId(`m3`).setEmoji(client.emoji.settings);
         let b4 = new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId(`m4`).setEmoji(client.emoji.info);
         let b5 = new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId(`m5`).setEmoji(client.emoji.allCommands);
-        let ro = new ActionRowBuilder().addComponents(b1,b2,b3,b4,b5);
 
         let select = new SelectMenuBuilder().setCustomId(`ok`).setPlaceholder(`❯ ${client.user.username} is Love`).addOptions([
             {
@@ -63,7 +62,6 @@ class Help extends AvonCommand{
                 value : `ok6`
             },
         ]);
-        let ro2 = new ActionRowBuilder().addComponents(select);
 
         let em1 = new EmbedBuilder().setColor(client.config.color).addFields({name : `__Music Commands__ [${client.AvonCommands.commands.filter(x => x.cat && x.cat === `music`).size}]`,value : `${client.AvonCommands.commands.filter(x => x.cat && x.cat === `music`).map(r => `\`${r.name}\``).sort().join(`, `)}`});
         let em2 = new EmbedBuilder().setColor(client.config.color).addFields({name : `__Filter Commands__ [${client.AvonCommands.commands.filter(x => x.cat && x.cat === `filters`).size}]`,value : `${client.AvonCommands.commands.filter(x => x.cat && x.cat === `filters`).map(r => `\`${r.name}\``).sort().join(`, `)}`});
@@ -95,67 +93,8 @@ class Help extends AvonCommand{
             },
             time : 50000,
         });
-        call.on('collect',async(int) => {
-            if(int.isButton())
-            {
-                if(int.customId === `m1`)
-                {
-                    return int.update({embeds : [em1]});
-                }
-                if(int.customId === `m2`)
-                {
-                    return int.update({embeds : [em2]});
-                }
-                if(int.customId === `m3`)
-                {
-                    return int.update({embeds : [em3]});
-                }
-                if(int.customId === `m4`)
-                {
-                    return int.update({embeds : [em4]});
-                }
-                if(int.customId === `m5`)
-                {
-                    return int.update({embeds : [em5]});
-                }
-            }
-            if(int.isSelectMenu())
-            {
-                for(const value of int.values)
-                {
-                    if(value === `ok1`)
-                    {
-                        return int.update({embeds : [em]});
-                    }
-                    if(value === `ok2`)
-                    {
-                        return int.update({embeds : [em1]});
-                    }
-                    if(value === `ok3`)
-                    {
-                        return int.update({embeds : [em2]});
-                    }
-                    if(value === `ok4`)
-                    {
-                        return int.update({embeds : [em3]});
-                    }
-                    if(value === `ok5`)
-                    {
-                        return int.update({embeds : [em4]});
-                    }
-                    if(value === `ok6`)
-                    {
-                        return int.update({embeds : [em5]});
-                    }
-                    
-                }
-            }
-        });
-        call.on('end',async() => {
-            if(!msg) return;
-            msg.edit({embeds : [em],components : [],content : `${client.emoji.info} | Help commands timed out. Run \`${prefix}help\` again.`})
-        });
-    } catch(e) { console.log(e) }
+        
+    } catch(e) { console.log(e); message.channel.send({content : `Join The support for help : https://discord.gg/VHA68ktXMG`}); }
 } 
 }
 module.exports = Help;
