@@ -12,7 +12,7 @@ One of the best music bot of discord with multiple search options
 
 
 ## Description
-- Few lines of codes were leaked so we leaked that part of the avon we don't claim to be official srcs of avon
+- Few lines of codes were leaked so we leaked that part of the avon we don't claim it to be working !
 ## Screenshots
 
 ![App Screenshot](https://media.discordapp.net/attachments/1065525090265083984/1072384599688228894/image.png)
