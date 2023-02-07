@@ -8,6 +8,7 @@ One of the best music bot of discord with multiple search options
 
 - [Rihan xD](https://discord.gg/VHA68ktXMG)
 - [Punit xD](https://discord.gg/VHA68ktXMG)
+- [PEACExM](https://discord.gg/VHA68ktXMG)
 
 
 ## Description
