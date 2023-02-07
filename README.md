@@ -17,3 +17,5 @@ One of the best music bot of discord with multiple search options
 
 ![App Screenshot](https://media.discordapp.net/attachments/1065525090265083984/1072384599688228894/image.png)
 
+## Support 
+- [Avon Development](https://discord.gg/VHA68ktXMG)
