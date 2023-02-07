@@ -1,8 +1,10 @@
 const { ShardingManager } = require("discord.js");
 const {token} = require(`../config.json`);
 const manager = new ShardingManager('src/index.js',{
-    totalShards : 2,
+    totalShards : 3,
     respawn : true,
-    token : token
+    token : token,
+    autoSpawn : true,
+    shardList : "auto"
 });
 manager.spawn();
