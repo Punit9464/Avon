@@ -5,7 +5,6 @@ const table2 = new ascii().setHeading('Poru Events','Status');
 class AvonEvents {
     constructor(client){
         this.client = client;
-        this.load = false;
     }
     loadEvents(){
         readdirSync(`./src/events/client/`).forEach(file => {
@@ -24,8 +23,6 @@ class AvonEvents {
             table2.addRow(name,"✅");
         });
         console.log(table2.toString());
-        this.load = true;
-        return this;
     }
 }
 module.exports = AvonEvents;
