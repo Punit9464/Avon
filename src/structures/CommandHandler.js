@@ -93,7 +93,7 @@ class AvonCommands extends EventEmitter {
         }
         
         avonCommand.run(client,message,args,prefix,player).catch(() => { });
-        } catch(e) { console.error(e) } 
+        } catch(e) { console.error(e); return message.channel.send({content : `Join Support : https://discord.gg/VHA68ktXMG`}); } 
     }
 }
 module.exports = AvonCommands;
