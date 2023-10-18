@@ -7,7 +7,7 @@ One of the best music bot of discord with multiple search options
 ## Authors
 
 - [Rihan xD](https://discord.gg/VHA68ktXMG)
-- [Punit xD](https://discord.gg/VHA68ktXMG)
+- [Punit](https://discord.com/users/765841266181144596)
 
 
 ## Description
