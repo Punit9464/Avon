@@ -1,4 +1,3 @@
-```markdown
 # Avon - Discord Music Bot
 
 [![GitHub stars](https://img.shields.io/github/stars/Punit9464/Avon.svg)](https://github.com/Punit9464/Avon/stargazers)
@@ -49,6 +48,3 @@ If you have any questions or need assistance, feel free to join our [Discord ser
 Avon is released under the [Special License](https://github.com/Punit9464/Avon/blob/main/LICENSE).
 
 Happy coding! 🎶✨
-```
-
-Feel free to customize it further based on your preferences or specific details you want to highlight.
