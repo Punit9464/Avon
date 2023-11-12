@@ -1,5 +1,3 @@
-Certainly! Below is a template for your `README.md` file for the Avon project:
-
 ```markdown
 # Avon - Discord Music Bot
 
