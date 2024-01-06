@@ -52,8 +52,8 @@ export default class AvonVolume extends AvonCommand {
               .setTitle(`Volume Arg`),
           ],
         });
-      let vol = Math.round(Number(args[0]) / 100);
-      if (Math.round(vol / 100) === dispatcher.player.filters.volume)
+      let vol = Number(args[0]) / 100;
+      if (vol === dispatcher.player.filters.volume)
         return message.reply({
           embeds: [
             this.client.utils
