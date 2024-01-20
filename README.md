@@ -41,7 +41,7 @@ To get started with Avon, follow these simple steps:
 
 ## Support
 
-If you have any questions or need assistance, feel free to join our [Discord server](https://discord.gg/lovezone) for community support.
+If you have any questions or need assistance, feel free to join our [Discord server](https://discord.gg/hommies) for community support.
 
 ## License
 
